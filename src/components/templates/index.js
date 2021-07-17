@@ -1,0 +1,6 @@
+export{default as CadastrarTemplate} from './CadastrarTemplate.vue'
+export{default as LogarTemplate} from './LogarTemplate.vue'
+export{default as CadastroProdutoTemplate} from './CadastroProdutoTemplate.vue'
+export{default as HomeListaTemplate} from './HomeListaTemplate.vue'
+export{default as CadastroMovimentacaoTemplate} from './CadastroMovimentacaoTemplate.vue'
+export{default as MovimentacaoListaTemplate} from './MovimentacaoListaTemplate.vue'

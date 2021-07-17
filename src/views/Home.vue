@@ -1,18 +1,55 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <Background>
+
+    <Header />
+
+    <Container>
+
+      <BodyCardCadastro :text="text">
+        <CadastroProdutoTemplate />
+      </BodyCardCadastro>
+      
+      <HomeListaTemplate class="lista" :dados="$produtos" />
+
+    </Container>
+    </Background>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import { Header, BodyCardCadastro } from "@/components/organisms";
+import { CadastroProdutoTemplate, HomeListaTemplate } from "@/components/templates";
+import { Container,Background } from "@/components/bosons";
 
 export default {
   name: "Home",
   components: {
-    HelloWorld,
+    Background,
+    Header,
+    CadastroProdutoTemplate,
+    Container,
+    BodyCardCadastro,
+    HomeListaTemplate,
+  },
+  data() {
+    return {
+      clicked: false,
+      text: 'Adicionar novo produto'
+    };
+  },
+  created() {
+    this.init();
+  },
+  methods: {
+    async init() {
+      await this.$store.dispatch("getProdutos");
+    },
+  },
+  computed: {
+    $produtos() {
+      return this.$store.getters.getProdutos;
+    },
   },
 };
 </script>
