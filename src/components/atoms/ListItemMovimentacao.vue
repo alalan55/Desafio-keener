@@ -14,12 +14,12 @@
 
             <div class="preco_custo">
                 <span class="title">Preço custo</span>
-                <span>{{preco_custo}}</span>
+                <span>R$ {{preco_custo.toLocaleString()}}</span>
             </div>
 
             <div class="preco_venda">
                 <span class="title">Preço venda</span>
-                <span>{{preco_venda}}</span>
+                <span>R$ {{preco_venda.toLocaleString()}}</span>
             </div>
 
        </div>
@@ -46,13 +46,14 @@
 <style lang="scss" scoped>
 li{
     list-style: none;
-    border: 1px solid;
     display: flex;
     margin: .5rem 0;
     border-radius: 5px;
     padding: .5rem;
     justify-content: space-between;
     flex-wrap: wrap; 
+
+    background: #1b1b21;
 
     
     .elements>div{
@@ -61,22 +62,21 @@ li{
         margin: 1rem .2rem;
 
         .title{
-            font-size: .8rem;
+            font-size: .7rem;
             font-weight: 800;
         }
     }
     .texto_movimentacao{
-        border: 1px solid;
         padding: .1rem;
         border-radius: 5px;
     }
     .entrada{
-       // background: rgb(63, 220, 63);
-        color: rgb(63, 220, 63);
+        background: rgb(51, 184, 51);
+        color: white;
     }
     .saida{
-       // background: rgb(223, 88, 88);
-        color: rgb(223, 88, 88);
+       background: rgb(202, 69, 69);
+        color: white;
     }
 }
 

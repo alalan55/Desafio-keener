@@ -1,6 +1,6 @@
 <template>
     <!-- <input type="text" :placeholder="nome" v-model="valor" @keypress="sendargs"> -->
-     <input :type="type" :placeholder="nome" v-model="valor" @change="$emit('value', $event.target.value)">
+     <input :type="type" :step="step" :placeholder="nome" v-model="valor" @change="$emit('value', $event.target.value)">
 </template>
 
 <script>
@@ -14,7 +14,8 @@
         props:{
             nome: {type: String, required: true},
             type:{ type: String, default: 'text'},
-            enviado: {type: Boolean}
+            enviado: {type: Boolean},
+            step:{type: String, default: 'any'}
         },
         methods:{
             sendargs(e){
@@ -42,5 +43,5 @@
 </script>
 
 <style lang="scss" scoped>
-
+  
 </style>

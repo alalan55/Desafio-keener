@@ -108,39 +108,38 @@ section {
 
   text-align: center;
   form {
-    border: 1px solid #4e0a43;
     padding: 1rem;
     display: flex;
     flex-direction: column;
     width: 95%;
     margin: 0 auto;
     border-radius: 5px;
-
-    input {
+    
+    input, select {
       padding: 1rem;
       margin: 1rem 0;
       border-radius: 5px;
       outline: none;
-      border: 1px solid #4e0a43;
-      color: #4e0a43;
+      color: white;
       font-size: 1.2rem;
+      background: #141419;
+      border: none;
 
       &::placeholder {
-        color: #4e0a43;
+        color: white;
       }
     }
     .btn{
       cursor: pointer;
         padding: .8rem;
-        border:  1px solid rgb(86, 150, 86);
-        background: none;
-        color: rgb(86, 150, 86);
+        background: rgb(86, 150, 86);
+        color: white;
         transition: .2s;
         border-radius: 5px;
+        border: none;
     &:hover{
         color: white;
-        background: rgb(121, 197, 121);
-        border:rgb(121, 197, 121);
+        background: rgb(109, 170, 109);
     }
     }
 
@@ -161,19 +160,5 @@ section {
       color: rgb(213, 61, 45);
     }
   }
-}
-
-#tipoMovimentacao{
-   padding: 1rem;
-      margin: 1rem 0;
-      border-radius: 5px;
-      outline: none;
-      border: 1px solid #4e0a43;
-      color: #4e0a43;
-      font-size: 1.2rem;
-
-      &::placeholder {
-        color: #4e0a43;
-      }
 }
 </style>
