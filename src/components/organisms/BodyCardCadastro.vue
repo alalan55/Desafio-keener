@@ -35,6 +35,7 @@ export default {
 
   span {
     cursor: pointer;
+    padding: 0 .5rem;
   }
   .cadastro {
     padding: 0 0.8rem;

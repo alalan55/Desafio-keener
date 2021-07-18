@@ -2,18 +2,14 @@
     <div class="movimentacoes">
 
         <Background>
-
-         <Header />
-        <Container>
-            <BodyCardCadastro :text="text">
-                <CadastroMovimentacaoTemplate />
-            </BodyCardCadastro>
-
-            <MovimentacaoListaTemplate :dados="$movimentacoes"/>
-        </Container>
+            <Header />
+                <Container>
+                    <BodyCardCadastro :text="text">
+                        <CadastroMovimentacaoTemplate />
+                    </BodyCardCadastro>
+                    <MovimentacaoListaTemplate :dados="$movimentacoes"/>
+                </Container>
         </Background>
-
-
 
     </div>
 </template>

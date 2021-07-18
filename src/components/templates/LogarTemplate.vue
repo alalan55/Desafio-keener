@@ -21,6 +21,9 @@
           <div class="autenicated" v-if="autenticado">
           <span>Usuário autencitado, redirecionando...</span>
         </div>
+         <div class="unautenicated" v-if="unautenicated" >
+          <span>Ops, tivemos um problema durante a autenticação, tente novamente</span>
+        </div>
         
         </div>
       </div>
@@ -39,9 +42,10 @@ export default {
   },
   data() {
     return {
-      email: "",
-      senha: "",
-      autenticado: false
+      email: '',
+      senha: '',
+      autenticado: false,
+      unautenicated: false
     };
   },
   methods: {
@@ -64,6 +68,12 @@ export default {
          this.autenticado = false
          this.$router.push('/')
        }, 3000)
+     }else{
+       this.unautenicated = true
+
+       setTimeout(() =>{
+         this.unautenicated = false
+       }, 5000)
      }
      
     },
@@ -173,4 +183,17 @@ export default {
     color: white;
   }
 }
+.unautenicated{
+   border: 1px solid;
+  background: rgb(218, 64, 64);
+  padding: .5rem;
+  border-radius: 5px;
+  width: 90%;
+  margin:  .2rem auto;
+  span{
+    color: white;
+  }
+}
+
+
 </style>
