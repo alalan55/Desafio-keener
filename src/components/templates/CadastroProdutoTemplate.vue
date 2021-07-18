@@ -74,7 +74,6 @@ export default {
       if(nomeValidado && quantidadeValidada && precoValidado ){
         let response = await this.$store.dispatch('cadastrarProduto', produto)
         response == 201 ? this.messageSuccess() : this.messageErro();
-        console.log('nome', this.name)
       }else{
         nomeValidado ? this.nomeValido = true : this.nomeValido = false;
         quantidadeValidada ? this.quantidadeValida = true : this.quantidadeValida = false;
@@ -83,7 +82,6 @@ export default {
 
     },
     nome(e){
-      console.log(e)
         this.name = e
     },
     preco(e){

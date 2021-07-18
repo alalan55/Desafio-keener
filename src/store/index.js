@@ -80,10 +80,11 @@ export default createStore({
         context.commit('RETORNAR_TOKEN', token)
         context.commit('NOME_USUARIO', res.nome)
         return res.status
-        
+
       } catch (error) {
         console.error(error)
-        throw error;
+        return error
+        //throw error;
       }
     },
     async cadastrarProduto(context, produto) {

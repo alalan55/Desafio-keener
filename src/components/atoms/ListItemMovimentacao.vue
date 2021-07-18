@@ -2,24 +2,24 @@
    <li>
        <div class="elements">
 
-            <div class="nome">
+            <div class="nome item">
                 <span class="title">Fornecedor</span>
                 <span>{{fornecedor}}</span>
             </div>
 
-            <div class="descricao">
+            <div class="descricao item">
                 <span class="title">Descrição</span>
                 <span>{{descricao}}</span>
             </div>
 
-            <div class="preco_custo">
+            <div class="preco_custo item">
                 <span class="title">Preço custo</span>
-                <span>R$ {{preco_custo.toLocaleString()}}</span>
+                <span>{{preco_custo.toLocaleString('pt-BR',{style: 'currency', currency: 'BRL'})}}</span>
             </div>
 
-            <div class="preco_venda">
+            <div class="preco_venda item">
                 <span class="title">Preço venda</span>
-                <span>R$ {{preco_venda.toLocaleString()}}</span>
+                <span> {{preco_venda.toLocaleString('pt-BR',{style: 'currency', currency: 'BRL'})}}</span>
             </div>
 
        </div>
@@ -67,6 +67,7 @@ li{
         .title{
             font-size: .7rem;
             font-weight: 800;
+            color: rgb(150, 188, 228);
         }
     }
     .tipo_movimentacao{
@@ -87,6 +88,7 @@ li{
             color: white;
         }
     }
+    
 }
 
 </style>
