@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <div class="logo">Logo</div>
+    <div class="logo">&STOCK</div>
     <div class="elementos__direito">
       <NavLink to="/" name="Home" class="link" />
       <NavLink to="/movimentacoes" name="Movimentações" class="link" />
@@ -9,12 +9,7 @@
         <NavLink to="/" name="logout" @click="logout" class="logout" />
       </div>
     </div>
-
-    <!-- 
-     <input type="checkbox" id="check" @click="openOrClose">
-                <label for="check" class="checkbtn"> -->
     <i class="fas fa-bars" @click="openOrClose"></i>
-    <!-- </label> -->
   </nav>
 </template>
 
@@ -102,31 +97,45 @@ nav {
   }
   .fa-bars {
     display: none;
-  }
-  #check {
-    display: none;
+    color: white !important;
   }
 }
 
 @media screen and(max-width:460px) {
-  .elementos__direito {
-    position: fixed;
-    width: 80%;
-    height: 100%;
-    // background: rgba(#000000, 1);
-    background: red;
-    left: -100%;
-    top: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    // color: white;
-    transition: all 0.5s;
+  nav {
+    padding: 0.8rem;
+    .elementos__direito {
+      position: fixed;
+      width: 80%;
+      height: 100%;
+      background: rgba(#000000, 0.9);
+      backdrop-filter: blur(3px);
+      left: -100%;
+      top: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.5s;
 
-    a {
-      color: white !important;
-      margin: 1rem 0;
+      a {
+        color: white !important;
+        margin: 2rem 0;
+      }
+
+      .name-logout {
+        border: 1px solid white !important;
+        padding: 0.5rem !important;
+        border-radius: 5px;
+
+        .logout {
+          border: 1px solid white !important;
+          &:hover {
+            background: white !important;
+            color: black !important;
+          }
+        }
+      }
     }
   }
   .fa-bars {
@@ -138,20 +147,6 @@ nav {
   .logo {
     color: white !important;
     z-index: 2;
-  }
-
-  .name-logout {
-    border: 1px solid white !important;
-    padding: 0.5rem !important;
-    border-radius: 5px;
-
-    .logout {
-      border: 1px solid white !important;
-      &:hover {
-        background: white !important;
-        color: black !important;
-      }
-    }
   }
 }
 </style>

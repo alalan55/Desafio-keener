@@ -52,8 +52,11 @@ li{
     padding: .5rem;
     justify-content: space-between;
     flex-wrap: wrap; 
-
     background: #1b1b21;
+
+    &>div{
+        flex: 1 1 300px;
+    }
 
     
     .elements>div{
@@ -66,17 +69,23 @@ li{
             font-weight: 800;
         }
     }
-    .texto_movimentacao{
-        padding: .1rem;
-        border-radius: 5px;
-    }
-    .entrada{
-        background: rgb(51, 184, 51);
-        color: white;
-    }
-    .saida{
-       background: rgb(202, 69, 69);
-        color: white;
+    .tipo_movimentacao{
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+
+        .texto_movimentacao{
+            padding: .1rem;
+            border-radius: 5px;
+        }
+        .entrada{
+            background: rgb(51, 184, 51);
+            color: white;
+        }
+        .saida{
+        background: rgb(202, 69, 69);
+            color: white;
+        }
     }
 }
 

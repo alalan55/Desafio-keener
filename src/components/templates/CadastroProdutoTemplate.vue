@@ -4,9 +4,16 @@
       <span>Insira as informações abaixo sobre o produto</span>
     </div>
     <form @submit.prevent="cadastrar">
+
+      <span v-if="!nomeValido" class="warning">Nome precisa conter o mínimo de 2 caracteres.</span>
       <Input type="string" nome="Nome" @value="nome" :enviado="enviado" />
+
+      <span v-if="!precoValido" class="warning" >O preço precisa ser maior que R$0,00.</span>
       <Input type="number" nome="Preço" @value="preco" :enviado="enviado" />
+
+      <span v-if="!quantidadeValida" class="warning">A quantidade precisa ser maior que 0.</span>
       <Input type="number" nome="Quantidade" @value="quantidade" :enviado="enviado" :step="step" />
+
       <button type="submit" class="btn">Cadastrar produto</button>
     </form>
       <div class="success" v-if="success">
@@ -20,6 +27,7 @@
 
 <script>
 import { Input } from "@/components/atoms";
+import * as validator from '@/validators/produtos-validators'
 export default {
     data(){
         return{
@@ -29,29 +37,53 @@ export default {
             enviado: false,
             erro: false,
             success: false,
-            step: '.01'
+            step: '.01',
+            messageProduto : 'Ops, algum campo não foi  preenchido corretamente',
+            nomeValido: true,
+            precoValido: true,
+            quantidadeValida: true
         }
     },
   components: {
     Input,
   },
   methods: {
+    resetValidators(){
+      this.nomeValido = true;
+      this.precoValido = true;
+      this.quantidadeValida = true;
+    },
+    resetCamposLocais(){
+      this.name = '';
+      this.price = '';
+      this.qtd = ''
+    },
     async cadastrar() {
-      let produto ={
+
+      this.resetValidators()
+      let produto = {
           nome: this.name,
           preco: this.price,
           quantidade: this.qtd
       }
-      let response = await this.$store.dispatch('cadastrarProduto', produto)
 
-      if(response == 201){
-        this.enviado = true;
-        this.messageSuccess();
+      let nomeValidado = validator.nomeValido(produto.nome);
+      let quantidadeValidada = validator.quantidadeValida(produto.quantidade)
+      let precoValidado = validator.precoValido(produto.preco)
+
+      if(nomeValidado && quantidadeValidada && precoValidado ){
+        let response = await this.$store.dispatch('cadastrarProduto', produto)
+        response == 201 ? this.messageSuccess() : this.messageErro();
+        console.log('nome', this.name)
       }else{
-        this.messageErro();
+        nomeValidado ? this.nomeValido = true : this.nomeValido = false;
+        quantidadeValidada ? this.quantidadeValida = true : this.quantidadeValida = false;
+        precoValidado ? this.precoValido = true :this.precoValido = false;
       }
+
     },
     nome(e){
+      console.log(e)
         this.name = e
     },
     preco(e){
@@ -63,6 +95,8 @@ export default {
     messageSuccess(){
       this.success = true
       setTimeout(() =>{
+         this.enviado = true
+         this.resetCamposLocais()
         this.success = false
       }, 5000)
     },
@@ -72,7 +106,6 @@ export default {
         this.erro = false
       }, 5000)
     }
-
   },
 };
 </script>
@@ -147,5 +180,8 @@ section {
       color: rgb(213, 61, 45);
     }
   }
+}
+.warning{
+  color: rgb(221, 221, 41);
 }
 </style>

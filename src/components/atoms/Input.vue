@@ -1,5 +1,4 @@
 <template>
-    <!-- <input type="text" :placeholder="nome" v-model="valor" @keypress="sendargs"> -->
      <input :type="type" :step="step" :placeholder="nome" v-model="valor" @change="$emit('value', $event.target.value)">
 </template>
 
@@ -22,17 +21,12 @@
                 if(e.Key == 'ENTER'){
                     this.$emit('valInput', this.valor)
                 }
-            },
-            apagaCampo(){
-                if(this.enviado){
-                    this.valor = ''
-                    
-                }
             }
         },
         watch:{
           enviado(novo, antigo){
               this.oldValue = antigo
+              console.log('valor antigo',antigo,'valor novo',novo)
               
                 if(novo == true){
                     this.valor = ''
