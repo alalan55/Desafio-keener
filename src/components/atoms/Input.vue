@@ -26,8 +26,7 @@
         watch:{
           enviado(novo, antigo){
               this.oldValue = antigo
-              console.log('valor antigo',antigo,'valor novo',novo)
-              
+            
                 if(novo == true){
                     this.valor = ''
                 }

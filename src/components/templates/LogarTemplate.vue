@@ -3,6 +3,7 @@
     <div class="form">
       <div class="form-content">
         <Title title="Acesse a sua conta" />
+        
 
         <div class="formulario">
           <!-- PODE SER UMA MOLÉCULA ESSE FORMULÁRIO -->
@@ -17,6 +18,10 @@
               >
             </div>
           </form>
+          <div class="autenicated" v-if="autenticado">
+          <span>Usuário autencitado, redirecionando...</span>
+        </div>
+        
         </div>
       </div>
     </div>
@@ -36,6 +41,7 @@ export default {
     return {
       email: "",
       senha: "",
+      autenticado: false
     };
   },
   methods: {
@@ -50,8 +56,16 @@ export default {
         email: this.email,
         senha: this.senha,
       };
-     await this.$store.dispatch("login", person);
-     this.$router.push('/')
+     let response = await this.$store.dispatch("login", person);
+     if(response == 200){
+       this.autenticado = true
+
+       setTimeout(() =>{
+         this.autenticado = false
+         this.$router.push('/')
+       }, 3000)
+     }
+     
     },
   },
 };
@@ -86,7 +100,6 @@ export default {
     }
   }
 }
-
 .formulario {
   text-align: center;
   width: 100%;
@@ -147,6 +160,17 @@ export default {
         justify-content: center;
       }
     }
+  }
+}
+.autenicated{
+  border: 1px solid;
+  background: rgb(42, 170, 42);
+  padding: .5rem;
+  border-radius: 5px;
+  width: 90%;
+  margin:  .2rem auto;
+  span{
+    color: white;
   }
 }
 </style>
