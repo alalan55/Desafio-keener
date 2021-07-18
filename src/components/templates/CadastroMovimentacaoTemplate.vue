@@ -239,4 +239,7 @@ section {
     }
   }
 }
+.warning{
+  color: rgb(221, 221, 41);
+}
 </style>

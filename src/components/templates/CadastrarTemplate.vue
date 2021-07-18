@@ -7,8 +7,13 @@
         <div class="formulario">
           <!-- PODE SER UMA MOLÉCULA ESSE FORMULÁRIO -->
           <form @submit.prevent="cadastrar">
+            <span v-if="!nomeValido">O seu nome precisa ter mais de 3 caracteres</span>
             <Input nome="Nome" @value="valueName" />
+
+            <span v-if="!emailValido">Insira um E-mmail válido</span>
             <Input nome="E-mail" @value="valueEmail"/>
+
+            <span v-if="!senhaValida">A sua senha precisa ter entre 8 e 20 caracteres, incluindo um caracter especial</span>
             <Input nome="Senha" type="password" @value="valueSenha" />
 
             <div class="btns">
@@ -18,6 +23,10 @@
               >
             </div>
           </form>
+          <div class="messages">
+            <span class="success" v-if="success">Usuário criado com sucesso</span>
+             <span class="error" v-if="error">Ops, problemas para registrar usuário, tente novamente.</span>
+          </div>
         </div>
       </div>
     </div>
@@ -26,6 +35,7 @@
 </template>
 
 <script>
+import * as validator from '@/validators/user-validators'
 import { ImgBox, Input, Title } from "@/components/atoms";
 export default {
   components: {
@@ -38,6 +48,11 @@ export default {
       nome: '',
       email: '',
       senha: '',
+      nomeValido: true,
+      emailValido: true,
+      senhaValida: true,
+      success: false,
+      error: false,
     }
   },
   methods:{
@@ -50,14 +65,47 @@ export default {
     valueSenha(e){
       this.senha = e
     },
-    cadastrar(){
+    resetValidators(){
+      this.nomeValido = true;
+      this.emailValido = true;
+      this.senhaValida = true;
+    },
+   async cadastrar(){
       let person = {
         nome: this.nome,
         email: this.email,
         senha: this.senha
       }
-      console.log(person)
-     this.$store.dispatch('cadastrar', person)
+      this.resetValidators();
+      let nomeValidado = validator.nomeValido(person.nome);
+      let emailValidado = validator.emailValido(person.email);
+      let senhaValidada = validator.senhaValida(person.senha)
+
+      if(nomeValidado && emailValidado && senhaValidada){
+        let response = await this.$store.dispatch('cadastrar', person)
+        
+        response == 201 ? this.showMessageAndRedrect() : this.showMessageError()
+       
+      }else{
+        nomeValidado ? this.nomeValido = true : this.nomeValido = false;
+        emailValidado ? this.emailValido = true : this.emailValido = false;
+        senhaValidada ? this.senhaValida = true : this.senhaValida = false;
+      }
+    },
+    showMessageAndRedrect(){
+      this.success = true
+
+      setTimeout(() =>{
+          this.success = false;
+          this.$router.push('/login')
+      }, 3500)
+    },
+    showMessageError(){
+      this.error = true
+
+      setTimeout(() =>{
+        this.error = false
+      }, 4000)
     }
   }
 };
@@ -161,4 +209,10 @@ export default {
         align-items: center;
         justify-content: center;
       }
+.success{
+  color: rgb(52, 167, 52);
+}
+.error{
+  color: rgb(199, 62, 62);
+}
 </style>
