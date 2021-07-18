@@ -1,5 +1,8 @@
 <template>
     <div class="movimentacoes">
+
+        <Background>
+
          <Header />
         <Container>
             <BodyCardCadastro :text="text">
@@ -8,6 +11,8 @@
 
             <MovimentacaoListaTemplate :dados="$movimentacoes"/>
         </Container>
+        </Background>
+
 
 
     </div>
@@ -15,10 +20,11 @@
 
 <script>
 import { Header, BodyCardCadastro } from "@/components/organisms";
-import { Container } from "@/components/bosons";
+import { Container,Background } from "@/components/bosons";
 import { CadastroMovimentacaoTemplate, MovimentacaoListaTemplate } from "@/components/templates";
     export default {
         components:{
+            Background,
             Header,
             Container,
             BodyCardCadastro,

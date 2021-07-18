@@ -56,6 +56,7 @@ export default {
         email: this.email,
         senha: this.senha
       }
+      console.log(person)
      this.$store.dispatch('cadastrar', person)
     }
   }

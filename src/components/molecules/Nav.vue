@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <div class="logo">Logo</div>
+    <div class="logo">&STOCK</div>
     <div class="elementos__direito">
       <NavLink to="/" name="Home" class="link" />
       <NavLink to="/movimentacoes" name="Movimentações" class="link" />
@@ -9,13 +9,7 @@
         <NavLink to="/" name="logout" @click="logout" class="logout" />
       </div>
     </div>
-   
-<!-- 
-     <input type="checkbox" id="check" @click="openOrClose">
-                <label for="check" class="checkbtn"> -->
-                    <i class="fas fa-bars" @click="openOrClose"></i>
-                <!-- </label> -->
-   
+    <i class="fas fa-bars" @click="openOrClose"></i>
   </nav>
 </template>
 
@@ -25,10 +19,10 @@ export default {
   components: {
     NavLink,
   },
-  data(){
-    return{
-      clicado: false
-    }
+  data() {
+    return {
+      clicado: false,
+    };
   },
   methods: {
     async logout() {
@@ -36,13 +30,14 @@ export default {
 
       this.$router.push("/login");
     },
-    openOrClose(){
-      let ladoDireito = document.querySelector('.elementos__direito')
-      this.clicado ? this.clicado = false : this.clicado = true
+    openOrClose() {
+      let ladoDireito = document.querySelector(".elementos__direito");
+      this.clicado ? (this.clicado = false) : (this.clicado = true);
 
-      this.clicado ? ladoDireito.style.left = '0' : ladoDireito.style.left = '-100%'
-   
-    }
+      this.clicado
+        ? (ladoDireito.style.left = "0")
+        : (ladoDireito.style.left = "-100%");
+    },
   },
   computed: {
     nome() {
@@ -69,6 +64,9 @@ nav {
 
     & > div {
       margin-left: 1rem;
+    }
+    a {
+      color: white !important;
     }
 
     .name-logout {
@@ -97,58 +95,58 @@ nav {
       margin-left: 1.5rem;
     }
   }
-  .fa-bars{
+  .fa-bars {
     display: none;
+    color: white !important;
   }
-  #check {
-            display: none;
-        }
 }
 
-@media screen and(max-width:460px){
-  .elementos__direito{
-    position: fixed;
-    width: 80%;
-    height: 100%;
-    // background: rgba(#000000, 1);
-    background: red;
-    left: -100%;
-    top: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    // color: white;
-     transition: all 0.5s;
+@media screen and(max-width:460px) {
+  nav {
+    padding: 0.8rem;
+    .elementos__direito {
+      position: fixed;
+      width: 80%;
+      height: 100%;
+      background: rgba(#000000, 0.9);
+      backdrop-filter: blur(3px);
+      left: -100%;
+      top: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.5s;
 
-    a{
-      color: white !important;
-      margin: 1rem 0;
-    }
-  }
-  .fa-bars{
-    display: block !important;
-    color: black !important;
-     z-index: 2;
-     cursor: pointer;
-  }
-  .logo{
-    color: white !important;
-    z-index: 2;
-  }
+      a {
+        color: white !important;
+        margin: 2rem 0;
+      }
 
-  .name-logout{
-    border: 1px solid white !important;
-    padding: .5rem !important;
-    border-radius: 5px;
+      .name-logout {
+        border: 1px solid white !important;
+        padding: 0.5rem !important;
+        border-radius: 5px;
 
-    .logout{
-      border: 1px solid white !important;
-      &:hover{
-        background: white !important;
-        color: black !important;
+        .logout {
+          border: 1px solid white !important;
+          &:hover {
+            background: white !important;
+            color: black !important;
+          }
+        }
       }
     }
+  }
+  .fa-bars {
+    display: block !important;
+    color: black !important;
+    z-index: 2;
+    cursor: pointer;
+  }
+  .logo {
+    color: white !important;
+    z-index: 2;
   }
 }
 </style>

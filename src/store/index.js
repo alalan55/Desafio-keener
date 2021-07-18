@@ -34,6 +34,7 @@ export default createStore({
   },
   actions: {
     async cadastrar(usuario) {
+      console.log(usuario)
       var url = 'http://localhost:3000/usuarios/cadastro';
       var options = {
         method: 'POST',
@@ -47,7 +48,10 @@ export default createStore({
 
       try {
 
-        await fetch(url, options)
+        let req = await fetch(url, options)
+        let res = await req.json()
+        console.log(res, usuario)
+        return res.status
 
       } catch (error) {
          console.error(error)
