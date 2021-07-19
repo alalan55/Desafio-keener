@@ -115,7 +115,6 @@ export default createStore({
     },
     destroyToken(context) {
       if (context.getters.loggedIn) {
-        //preciso implementar um método de logout na minha api, mas como nao tenho, vou apenas remover o token do local storage
         localStorage.removeItem('access-token')
         localStorage.removeItem('nome-user')
         context.commit('DESTROI_TOKEN')

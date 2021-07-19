@@ -184,6 +184,11 @@ export default {
       .cadastrar {
         background: #4e0a43;
         color: white;
+        transition: .2s ease;
+        border: none;
+        &:hover{
+          background: #761065;
+        }
       }
       .entrar {
         background: none;

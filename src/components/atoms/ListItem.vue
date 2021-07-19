@@ -1,12 +1,16 @@
 <template>
    <li>
+       <div class="id">
+           <span class="title">Id</span>
+           <span class="text">#{{id}}</span>
+       </div>
        <div class="nome">
            <span class="title">Nome</span>
            <span class="text">{{name}}</span>
        </div>
        <div class="preco">
            <span class="title">Preco</span>
-           <span class="text">{{preco.toLocaleString('pt-BR',{style: 'currency', currency: 'BRL'})}}</span>
+           <span class="text">{{ $preco}}</span>
        </div>
        <div class="quantidade">
            <span class="title">Quantidade</span>
@@ -14,7 +18,7 @@
        </div>
        <div class="total">
            <span class="title">Total</span>
-           <span class="text">{{$total.toLocaleString('pt-BR',{style: 'currency', currency: 'BRL'})}}</span>
+           <span class="text">{{$total}}</span>
        </div>
 
    </li>
@@ -22,11 +26,15 @@
 
 <script>
     export default {
-        props:['name', 'preco', 'quantidade'],
+        props:['id','name', 'preco', 'quantidade'],
         computed:{
             $total(){
                 let total = this.preco * this.quantidade
-                return total
+                return total.toLocaleString('pt-BR',{style: 'currency', currency: 'BRL'})
+            },
+            $preco(){
+                let precoFormatado = this.preco.toLocaleString('pt-BR',{style: 'currency', currency: 'BRL'})
+                return precoFormatado
             }
         }
     }
@@ -44,6 +52,11 @@ li{
     flex-wrap: wrap; 
     background: #1B1B21;
     border-radius: 5px;
+    transition: .2s ease-in-out;
+
+    &:hover{
+        background: #1f1f26;
+    }
 
     
     &>div{
@@ -52,16 +65,19 @@ li{
         text-align: center;
     }
     .nome{
-        flex: 1 1 200px;
+        flex: 1 1 150px;
     }
     .preco{
-        flex: 1 1 200px;
+        flex: 1 1 150px;
     }
     .quantidade{
-        flex: 1 1 200px;
+        flex: 1 1 150px;
     }
     .total{
-        flex: 1 1 200px;
+        flex: 1 1 150px;
+    }
+    .id{
+        flex: 1 1 150px;
     }
 
     .title{

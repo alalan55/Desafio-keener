@@ -147,6 +147,7 @@ nav {
   .logo {
     color: white !important;
     z-index: 2;
+    font-weight: 800;
   }
 }
 </style>
