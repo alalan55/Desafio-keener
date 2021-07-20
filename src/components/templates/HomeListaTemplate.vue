@@ -4,6 +4,7 @@
       <ListItem
         v-for="data in dados"
         :key="data.id"
+        :id="data.id_produtos"
         :name="data.nome"
         :preco="data.preco"
         :quantidade="data.quantidade"

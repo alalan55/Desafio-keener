@@ -14,12 +14,12 @@
 
             <div class="preco_custo item">
                 <span class="title">Preço custo</span>
-                <span>{{preco_custo.toLocaleString('pt-BR',{style: 'currency', currency: 'BRL'})}}</span>
+                <span>{{$precoCusto}}</span>
             </div>
 
             <div class="preco_venda item">
                 <span class="title">Preço venda</span>
-                <span> {{preco_venda.toLocaleString('pt-BR',{style: 'currency', currency: 'BRL'})}}</span>
+                <span> {{$precoVenda}}</span>
             </div>
 
        </div>
@@ -38,6 +38,12 @@
             },
             $movimentacaoEstilo(){
                 return this.movimentacao == 0 ? true : false
+            },
+            $precoVenda(){
+                return this.preco_venda.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})
+            },
+            $precoCusto(){
+                return this.preco_custo.toLocaleString('pt-BR',{style: 'currency', currency: 'BRL'})
             }
         }
     }
