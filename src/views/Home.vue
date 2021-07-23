@@ -7,7 +7,7 @@
     <Container>
 
       <BodyCardCadastro :text="text">
-        <CadastroProdutoTemplate />
+        <CadastroProdutoTemplate @atualizarLista="atualizarLista"/>
       </BodyCardCadastro>
       
       <HomeListaTemplate class="lista" :dados="$produtos" />
@@ -45,6 +45,11 @@ export default {
     async init() {
       await this.$store.dispatch("getProdutos");
     },
+    atualizarLista(e){
+                if(e){
+                    this.init();
+                }
+            }
   },
   computed: {
     $produtos() {

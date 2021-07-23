@@ -10,11 +10,7 @@ export const tipoMovimentacao = (value) =>{
     let movimentacaoValida = value == 0 || value == 1 ? true : false
     return movimentacaoValida
 }
-export const precoCusto = value =>{
-    let precoCustoValido = value != null && value > 0
-    return precoCustoValido
-}
-export const precoVenda = value =>{
-    let precoVendaValido = value != null && value > 0
-    return precoVendaValido
+export const quantidade = (value) =>{
+    let quantidadeValida = value > 0 ? true : false
+    return quantidadeValida
 }

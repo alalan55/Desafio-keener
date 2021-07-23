@@ -1,6 +1,5 @@
 import { createStore } from "vuex";
 
-
 export default createStore({
   state: {
     token: localStorage.getItem('access-token') || null,
@@ -22,7 +21,6 @@ export default createStore({
       state.produtos.unshift(produto)
     },
     GET_PRODUTOS(state, produtos) {
-      // state.produtos.push(produtos)
       state.produtos = produtos
     },
     GET_MOVIMENTACOES(state, movimentacoes){
@@ -84,7 +82,6 @@ export default createStore({
       } catch (error) {
         console.error(error)
         return error
-        //throw error;
       }
     },
     async cadastrarProduto(context, produto) {
@@ -105,9 +102,6 @@ export default createStore({
         let req = await fetch(url, options);
         let res = await req.json();
 
-        if (res.status == 201) {
-          context.commit('ADICIONA_PRODUTO', produto)
-        }
         return res.status
       } catch (error) {
         console.error(error)
@@ -167,11 +161,8 @@ export default createStore({
         
         let req = await fetch(url, options)
         let res = await req.json()
-  
-        if(res.status == 201){
-          context.commit('CADASTRAR_MOVIMENTACAO', movimentacao)
-        }
         return res.status
+
       } catch (error) {
         console.error(error)
       }
@@ -193,7 +184,10 @@ export default createStore({
       return state.produtos
     },
     getMovimentacoes(state){
-      return state.movimentacoes
+       let formatedMovimentacoes = state.movimentacoes.sort((a,b) =>{
+        return a.fornecedor < b.fornecedor ? -1 : a.fornecedor > b.fornecedor ? 1 : 0
+      })
+      return formatedMovimentacoes
     }
   }
 });

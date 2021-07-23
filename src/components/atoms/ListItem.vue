@@ -12,15 +12,6 @@
            <span class="title">Preco</span>
            <span class="text">{{ $preco}}</span>
        </div>
-       <div class="quantidade">
-           <span class="title">Quantidade</span>
-           <span class="text">{{quantidade}}</span>
-       </div>
-       <div class="total">
-           <span class="title">Total</span>
-           <span class="text">{{$total}}</span>
-       </div>
-
    </li>
 </template>
 
@@ -65,19 +56,13 @@ li{
         text-align: center;
     }
     .nome{
-        flex: 1 1 150px;
+        flex: 1 200px;
     }
     .preco{
-        flex: 1 1 150px;
-    }
-    .quantidade{
-        flex: 1 1 150px;
-    }
-    .total{
-        flex: 1 1 150px;
+        flex: 1 1 200px;
     }
     .id{
-        flex: 1 1 150px;
+        flex: 1 1 200px;
     }
 
     .title{

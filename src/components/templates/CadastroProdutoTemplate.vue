@@ -4,19 +4,30 @@
       <span>Insira as informações abaixo sobre o produto</span>
     </div>
     <form @submit.prevent="cadastrar">
-
-      <span v-if="!nomeValido" class="warning">Nome precisa conter o mínimo de 2 caracteres.</span>
+      <span v-if="!nomeValido" class="warning"
+        >Nome precisa conter o mínimo de 2 caracteres.</span
+      >
       <Input type="string" nome="Nome" @value="nome" :enviado="enviado" />
 
-      <span v-if="!precoValido" class="warning" >O preço precisa ser maior que R$0,00.</span>
+      <span v-if="!precoValido" class="warning"
+        >O preço precisa ser maior que R$0,00.</span
+      >
       <Input type="number" nome="Preço" @value="preco" :enviado="enviado" />
 
-      <span v-if="!quantidadeValida" class="warning">A quantidade precisa ser maior que 0.</span>
-      <Input type="number" nome="Quantidade" @value="quantidade" :enviado="enviado" :step="step" />
+      <span v-if="!quantidadeValida" class="warning"
+        >A quantidade precisa ser maior que 0.</span
+      >
+      <Input
+        type="number"
+        nome="Quantidade"
+        @value="quantidade"
+        :enviado="enviado"
+        :step="step"
+      />
 
       <button type="submit" class="btn">Cadastrar produto</button>
     </form>
-      <div class="success" v-if="success">
+    <div class="success" v-if="success">
       <span>Produto inserido com sucesso</span>
     </div>
     <div class="error" v-if="erro">
@@ -27,83 +38,87 @@
 
 <script>
 import { Input } from "@/components/atoms";
-import * as validator from '@/validators/produtos-validators'
+import * as validator from "@/validators/produtos-validators";
 export default {
-    data(){
-        return{
-            name: '',
-            price: '',
-            qtd: '',
-            enviado: false,
-            erro: false,
-            success: false,
-            step: '.01',
-            messageProduto : 'Ops, algum campo não foi  preenchido corretamente',
-            nomeValido: true,
-            precoValido: true,
-            quantidadeValida: true
-        }
-    },
+  data() {
+    return {
+      name: "",
+      price: "",
+      qtd: "",
+      enviado: false,
+      erro: false,
+      success: false,
+      step: ".01",
+      messageProduto: "Ops, algum campo não foi  preenchido corretamente",
+      nomeValido: true,
+      precoValido: true,
+      quantidadeValida: true,
+    };
+  },
   components: {
     Input,
   },
   methods: {
-    resetValidators(){
+    resetValidators() {
       this.nomeValido = true;
       this.precoValido = true;
       this.quantidadeValida = true;
     },
-    resetCamposLocais(){
-      this.name = '';
-      this.price = '';
-      this.qtd = ''
+    resetCamposLocais() {
+      this.name = "";
+      this.price = "";
+      this.qtd = "";
     },
     async cadastrar() {
-
-      this.resetValidators()
+      this.resetValidators();
       let produto = {
-          nome: this.name,
-          preco: this.price,
-          quantidade: this.qtd
-      }
+        nome: this.name,
+        preco: this.price,
+        quantidade: this.qtd,
+      };
 
       let nomeValidado = validator.nomeValido(produto.nome);
-      let quantidadeValidada = validator.quantidadeValida(produto.quantidade)
-      let precoValidado = validator.precoValido(produto.preco)
+      let quantidadeValidada = validator.quantidadeValida(produto.quantidade);
+      let precoValidado = validator.precoValido(produto.preco);
 
-      if(nomeValidado && quantidadeValidada && precoValidado ){
-        let response = await this.$store.dispatch('cadastrarProduto', produto)
+      if (nomeValidado && quantidadeValidada && precoValidado) {
+        let response = await this.$store.dispatch("cadastrarProduto", produto);
         response == 201 ? this.messageSuccess() : this.messageErro();
-      }else{
-        nomeValidado ? this.nomeValido = true : this.nomeValido = false;
-        quantidadeValidada ? this.quantidadeValida = true : this.quantidadeValida = false;
-        precoValidado ? this.precoValido = true :this.precoValido = false;
+      } else {
+        nomeValidado ? (this.nomeValido = true) : (this.nomeValido = false);
+        quantidadeValidada
+          ? (this.quantidadeValida = true)
+          : (this.quantidadeValida = false);
+        precoValidado ? (this.precoValido = true) : (this.precoValido = false);
       }
-
     },
-    nome(e){
-        this.name = e
+    nome(e) {
+      this.name = e;
     },
-    preco(e){
-        this.price = e
+    preco(e) {
+      this.price = e;
     },
-    quantidade(e){
-        this.qtd = e
+    quantidade(e) {
+      this.qtd = e;
     },
-    messageSuccess(){
-      this.success = true
-      setTimeout(() =>{
-         this.enviado = true
-         this.resetCamposLocais()
-        this.success = false
-      }, 5000)
+     atualizarLista(){
+       this.$emit('atualizarLista', true)
     },
-     messageErro(){
-      this.erro = true
-      setTimeout(() =>{
-        this.erro = false
-      }, 5000)
-    }
+    messageSuccess() {
+      this.success = true;
+      setTimeout(() => {
+        this.enviado = true;
+        this.resetCamposLocais();
+        this.atualizarLista()
+        this.success = false;
+      }, 5000);
+    },
+    messageErro() {
+      this.erro = true;
+      setTimeout(() => {
+        this.erro = false;
+      }, 5000);
+    },
   },
 };
 </script>
@@ -111,12 +126,11 @@ export default {
 <style lang="scss" scoped>
 section {
   margin: 1rem 0;
-  // background:#303238;
-  padding: .1rem;
+  padding: 0.1rem;
   border-radius: 5px;
-  .title{
+  .title {
     margin: 1rem 0;
-    span{
+    span {
       font-size: 1.5rem;
     }
   }
@@ -128,7 +142,7 @@ section {
     flex-direction: column;
     width: 95%;
     margin: 0 auto;
-  border-radius: 5px;
+    border-radius: 5px;
 
     input {
       padding: 1rem;
@@ -140,46 +154,43 @@ section {
       background: #141419;
       border: none;
 
-
-
       &::placeholder {
         color: white;
       }
     }
-     .btn{
+    .btn {
       cursor: pointer;
-        padding: .8rem;
-        background: rgb(86, 150, 86);
-        color: white;
-        transition: .2s;
-        border-radius: 5px;
-        border: none;
-    &:hover{
+      padding: 0.8rem;
+      background: rgb(86, 150, 86);
+      color: white;
+      transition: 0.2s;
+      border-radius: 5px;
+      border: none;
+      &:hover {
         color: white;
         background: rgb(109, 170, 109);
+      }
     }
-    }
-
   }
 
-    .success{
-    margin-top: .8rem;
+  .success {
+    margin-top: 0.8rem;
 
-    span{
+    span {
       font-weight: 500;
       color: rgb(78, 170, 78);
     }
   }
-  .error{
-    margin-top: .8rem;
+  .error {
+    margin-top: 0.8rem;
 
-    span{
+    span {
       font-weight: 500;
       color: rgb(213, 61, 45);
     }
   }
 }
-.warning{
+.warning {
   color: rgb(221, 221, 41);
 }
 </style>
