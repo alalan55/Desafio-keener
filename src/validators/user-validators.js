@@ -15,7 +15,6 @@ export const senhaValida = (value) =>{
     if(senhaMinimoOitoCaracteres){
         
         senhaEhValida = regex.test(String(value))
-        console.log('Passou no regex da aplicação', senhaEhValida)
     }
     return senhaEhValida
 }

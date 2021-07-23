@@ -33,7 +33,6 @@ export default createStore({
   actions: {
     async cadastrar(context, usuario) {
 
-      var url = 'http://localhost:3000/usuarios/cadastro';
       var options = {
         method: 'POST',
         mode: 'cors',
@@ -46,7 +45,7 @@ export default createStore({
 
       try {
 
-        let req = await fetch(url, options)
+        let req = await fetch(process.env.VUE_APP_ROUTE + '/usuarios/cadastro', options)
         let res = await req.json()
         return res.status
 
@@ -56,7 +55,6 @@ export default createStore({
       }
     },
     async login(context, usuario) {
-      var url = 'http://localhost:3000/usuarios/login';
       var options = {
         method: 'POST',
         mode: 'cors',
@@ -69,7 +67,7 @@ export default createStore({
 
       try {
 
-        let req = await fetch(url, options)
+        let req = await fetch(process.env.VUE_APP_ROUTE + '/usuarios/login', options)
         let res = await req.json()
         const token = res.token
 
@@ -85,7 +83,6 @@ export default createStore({
       }
     },
     async cadastrarProduto(context, produto) {
-      let url = 'http://localhost:3000/produtos'
 
       var options = {
         method: 'POST',
@@ -99,7 +96,7 @@ export default createStore({
       }
 
       try {
-        let req = await fetch(url, options);
+        let req = await fetch(process.env.VUE_APP_ROUTE + '/produtos', options);
         let res = await req.json();
 
         return res.status
@@ -115,10 +112,8 @@ export default createStore({
       }
     },
     async getProdutos(context) {
-      let url = 'http://localhost:3000/produtos'
-
       try {
-        let req = await fetch(url)
+        let req = await fetch(process.env.VUE_APP_ROUTE  + '/produtos')
         let res = await req.json()
         if (res.status == 200) {
           context.commit('GET_PRODUTOS', res.response)
@@ -128,10 +123,9 @@ export default createStore({
       }
     },
     async getMovimentacoes(context){
-      let url = 'http://localhost:3000/movimentacao'
-
+     
       try{
-        let req = await fetch(url);
+        let req = await fetch(process.env.VUE_APP_ROUTE  + '/movimentacao');
         let res = await req.json();
 
         if(res.status == 200){
@@ -145,7 +139,6 @@ export default createStore({
   
     },
     async cadastrarMovimentacao(context, movimentacao){
-     let url = 'http://localhost:3000/movimentacao'
 
       var options = {
         method: 'POST',
@@ -159,7 +152,7 @@ export default createStore({
       }
       try {
         
-        let req = await fetch(url, options)
+        let req = await fetch(process.env.VUE_APP_ROUTE  + '/movimentacao', options)
         let res = await req.json()
         return res.status
 
