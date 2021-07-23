@@ -32,6 +32,19 @@ ul {
   overflow: hidden;
   overflow-y: auto;
   border-radius: 5px;
+
+  &::-webkit-scrollbar{
+    width: 15px;
+  }
+  &::-webkit-scrollbar-track{
+    background: white;
+    border: none;
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-thumb{
+      background: #96BCE4;
+      border-radius: 10px;
+  }
   
 }
 </style>

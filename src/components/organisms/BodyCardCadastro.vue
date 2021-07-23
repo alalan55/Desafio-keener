@@ -30,7 +30,6 @@ export default {
   width: 100%;
   padding: 0.4rem;
   border-radius: 5px;
-  // background: #2f2f35;
   background: #303238 !important;
 
   span {

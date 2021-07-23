@@ -1,6 +1,4 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-// import Home from "../views/Home.vue";
-//import Login from "@/views/Login.vue"
 import Login from "../views/Login.vue"
 import Registrar from "../views/Registrar.vue"
 
@@ -24,9 +22,6 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "home" */ "../views/Home.vue"),
       meta:{
@@ -36,9 +31,6 @@ const routes = [
   {
     path: "/movimentacoes",
     name: "Movimentacao",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "movimentacao" */ "../views/Movimentacao.vue"),
       meta:{
@@ -48,21 +40,9 @@ const routes = [
   {
     path: "/about",
     name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
-  },
-  // {
-  //   path: "/logout",
-  //   name: "Logout",
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () =>
-  //     import(/* webpackChunkName: "about" */ "../views/Logout.vue"),
-  // },
+  }
 ];
 
 const router = createRouter({

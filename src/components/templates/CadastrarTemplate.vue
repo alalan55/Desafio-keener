@@ -24,7 +24,7 @@
             </div>
           </form>
           <div class="messages">
-            <span class="success" v-if="success">Usuário criado com sucesso</span>
+            <span class="success" v-if="success"><span>Usuário criado com sucesso</span> </span>
              <span class="error" v-if="error">Ops, problemas para registrar usuário, tente novamente.</span>
           </div>
         </div>
@@ -215,7 +215,15 @@ export default {
         justify-content: center;
       }
 .success{
-  color: rgb(52, 167, 52);
+  margin-top: 10px;
+  background: rgb(42, 170, 42);
+  padding: .5rem;
+  border-radius: 5px;
+  width: 90%;
+  margin:  .2rem auto;
+  span{
+    color: white;
+  }
 }
 .error{
   color: rgb(199, 62, 62);

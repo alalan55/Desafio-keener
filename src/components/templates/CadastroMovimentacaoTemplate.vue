@@ -25,19 +25,18 @@
         <option value="1">Saída</option>
       </select>
 
-      <span v-if="!precoCustoValidado" class="warning">Informe um valor válido</span>
+      <span v-if="!quantidadeValidada" class="warning">Quantidade precisa ser maior que 0</span>
       <Input
         type="number"
-        nome="Preço de custo"
-        @value="preco_custo"
+        nome="Quantidade"
+        @value="quantidade"
         :enviado="enviado"
       />
 
-      <span v-if="!precoVendaValidado" class="warning">Informe um valor válido</span>
       <Input
         type="number"
-        nome="Preço de venda"
-        @value="preco_venda"
+        nome="Id do produto"
+        @value="id_do_produto"
         :enviado="enviado"
       />
       <button type="submit" class="btn">Registrar movimentação</button>
@@ -59,17 +58,16 @@ export default {
     return {
       fornecedor: '',
       descricao: '',
-      precoCusto: 0,
-      precoVenda: 0,
+      qtd: 0,
+      id_prod: '',
       select: '',
       success: false,
       erro: false,
       enviado: false,
       fornecedorValido: true,
       descricaoValidada: true,
-      precoCustoValidado: true,
-      precoVendaValidado: true,
       tipoMovimentacaoValidado: true,
+      quantidadeValidada: true
     };
   },
   components: {
@@ -99,29 +97,20 @@ export default {
       let movimentacao = {
         fornecedor: this.fornecedor,
         descricao: this.descricao,
-        preco_custo: this.precoCusto,
-        preco_venda: this.precoVenda,
+       quantidade: +this.qtd,
+       id_produto: +this.id_prod,
         tipo_movimentacao: +this.select,
       };
 
       let fornecedorValidado = validator.fornecedor(movimentacao.fornecedor);
       let descricaoValida = validator.descricao(movimentacao.descricao);
-      let precoCustoValido = validator.precoCusto(movimentacao.preco_custo);
-      let precoVendaValida = validator.precoVenda(movimentacao.preco_venda);
       let tipoMovimentacaoValida = validator.tipoMovimentacao(movimentacao.tipo_movimentacao);
+      let quantidadeValida = validator.quantidade(movimentacao.quantidade)
 
-      if (
-        fornecedorValidado &&
-        descricaoValida &&
-        precoCustoValido &&
-        precoVendaValida &&
-        tipoMovimentacaoValida
-      ) {
-        let response = await this.$store.dispatch(
-          "cadastrarMovimentacao",
-          movimentacao
-        );
-        response == 201 ? this.messageSuccess() : this.messageErro();
+      if (fornecedorValidado && descricaoValida && tipoMovimentacaoValida && quantidadeValida) {
+        
+       let response = await this.$store.dispatch("cadastrarMovimentacao",movimentacao);
+       response == 201 ? this.messageSuccess() : this.messageErro();
       } else {
         fornecedorValidado
           ? (this.fornecedorValido = true)
@@ -129,15 +118,12 @@ export default {
         descricaoValida
           ? (this.descricaoValidada = true)
           : (this.descricaoValidada = false);
-        precoCustoValido
-          ? (this.precoCustoValidado = true)
-          : (this.precoCustoValidado = false);
-        precoVendaValida
-          ? (this.precoVendaValidado = true)
-          : (this.precoVendaValidado = false);
         tipoMovimentacaoValida
           ? (this.tipoMovimentacaoValidado = true)
           : (this.tipoMovimentacaoValidado = false);
+        quantidadeValida
+          ? (this.quantidadeValidada = true)
+          : (this.quantidadeValidada = false);
       }
     },
     fornec(e) {
@@ -146,18 +132,22 @@ export default {
     descr(e) {
       this.descricao = e;
     },
-    preco_custo(e) {
-      this.precoCusto = e;
+    quantidade(e) {
+      this.qtd = e;
     },
-    preco_venda(e) {
-      this.precoVenda = e;
+    id_do_produto(e) {
+      this.id_prod = e;
     },
     limparCampos() {
       this.select = "";
     },
-    messageSuccess() {
+     atualizarLista(){
+       this.$emit('atualizarLista', true)
+    },
+   async messageSuccess() {
       this.success = true;
       this.limparCampos();
+      this.atualizarLista();
       setTimeout(() => {
         this.success = false;
         this.resetCamposLocais();

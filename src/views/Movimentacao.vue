@@ -5,7 +5,7 @@
             <Header />
                 <Container>
                     <BodyCardCadastro :text="text">
-                        <CadastroMovimentacaoTemplate />
+                        <CadastroMovimentacaoTemplate @atualizarLista="atualizarLista" />
                     </BodyCardCadastro>
                     <MovimentacaoListaTemplate :dados="$movimentacoes"/>
                 </Container>
@@ -29,7 +29,7 @@ import { CadastroMovimentacaoTemplate, MovimentacaoListaTemplate } from "@/compo
         },
         data(){
             return{
-                text: 'Adicionar movimentação'
+                text: 'Adicionar movimentação',
             }
         },
         created(){
@@ -38,6 +38,11 @@ import { CadastroMovimentacaoTemplate, MovimentacaoListaTemplate } from "@/compo
         methods:{
             async init(){
                 await this.$store.dispatch('getMovimentacoes')
+            },
+            atualizarLista(e){
+                if(e){
+                    this.init();
+                }
             }
         },
         computed:{
