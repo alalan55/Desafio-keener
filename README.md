@@ -12,6 +12,8 @@ Projeto foi desenvolvido usando:
 
 🐋 Docker
 
+Para rodar a aplicação, é preciso realizar um cadastro e fazer um login com o cadastro criado, para isso, usar a aplicação em conjunto com a API criada para o mesmo
+
 ## Project setup
 ```
 yarn install
